@@ -1,0 +1,22 @@
+services:
+  nodejs:
+      container_name: nodejs
+      build:
+        context: ../
+        dockerfile: ./docker/dockerfile
+        target: development
+      volumes:
+        - ${APP_BACK_DIRECTORY}:/usr/src/app
+        - /usr/src/app/node_modules
+      ports:
+        - ${BACK_SERVER_PORT}:${BACK_SERVER_PORT}
+        - 9229:9229
+      # command: yarn run start:dev
+      command: sleep infinity
+      env_file:
+        - .env
+      networks:
+        - nodejs-network
+networks:
+  nodejs-network:
+    
